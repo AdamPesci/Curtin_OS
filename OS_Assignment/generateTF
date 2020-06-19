@@ -1,0 +1,18 @@
+#!/bin/bash
+if [ "$#" -eq 2 ]
+    then
+        LOW=1 #lower bound of range
+        HIGH=${1} #upper bound of range
+        mkdir -p resources
+        rm -f ./resources/task_file
+        for (( i=1; i <= ${2}; i++ ))
+            do
+            echo "$i $((RANDOM * ($HIGH-$LOW+1) / 32768 + $LOW))" >> ./resources/task_file
+            done
+    else
+        echo "Invalid arguments"
+        echo "call script as follows: './generateTF m n'"
+        echo "m = maximum burst time, n = the number of tasks"
+        exit 1
+fi
+
